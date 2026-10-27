@@ -1,0 +1,152 @@
+@import 'tailwindcss';
+
+/* Theme: "chart paper" — cool blue-grey surfaces, a teal bearing accent,
+   amber reserved strictly for things that are due. Change brand colours here. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Bricolage Grotesque', 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace;
+
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
+  --color-due: var(--due);
+  --color-due-soft: var(--due-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+}
+
+:root {
+  --paper: #eef2f5;
+  --surface: #ffffff;
+  --sunken: #e4e9ee;
+  --line: #d3dbe3;
+  --ink: #172230;
+  --muted: #566578;
+  --accent: #0b6f78;
+  --accent-soft: #d6eeef;
+  --accent-ink: #ffffff;
+  --due: #8a5a00;
+  --due-soft: #fbedcc;
+  --danger: #b0322c;
+  --danger-soft: #f8dedb;
+  --ok: #2c6b3c;
+  --ok-soft: #dcefe0;
+  /* Activity map: one hue per area */
+  --area-coding: #0b7d86;
+  --area-learning: #4657c9;
+  --area-interviews: #b5700f;
+  --area-projects: #8a46c8;
+  --area-app: #4f6b88;
+  color-scheme: light;
+}
+
+.dark {
+  --paper: #121a24;
+  --surface: #19232f;
+  --sunken: #0f161f;
+  --line: #2a3747;
+  --ink: #e4eaf1;
+  --muted: #9aa8b8;
+  --accent: #4cc3cc;
+  --accent-soft: #163a40;
+  --accent-ink: #062226;
+  --due: #f0c15c;
+  --due-soft: #3a2e12;
+  --danger: #f08b84;
+  --danger-soft: #3d1d1b;
+  --ok: #7fd394;
+  --ok-soft: #173322;
+  --area-coding: #43c0c9;
+  --area-learning: #8796ff;
+  --area-interviews: #f0ae46;
+  --area-projects: #c08bf2;
+  --area-app: #93aac4;
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+#main:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.safe-bottom {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dial-sweep {
+    transition: stroke-dashoffset 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .sheet-in {
+    animation: sheet-in 180ms ease-out;
+  }
+}
+@keyframes sheet-in {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* Activity map cells: intensity is mixed from the area colour into the empty-cell colour. */
+.amap-0 { fill: var(--sunken); }
+.amap-1 { fill: color-mix(in oklab, var(--cell) 28%, var(--sunken)); }
+.amap-2 { fill: color-mix(in oklab, var(--cell) 52%, var(--sunken)); }
+.amap-3 { fill: color-mix(in oklab, var(--cell) 76%, var(--sunken)); }
+.amap-4 { fill: var(--cell); }
+.amap-swatch-0 { background: var(--sunken); }
+.amap-swatch-1 { background: color-mix(in oklab, var(--cell) 28%, var(--sunken)); }
+.amap-swatch-2 { background: color-mix(in oklab, var(--cell) 52%, var(--sunken)); }
+.amap-swatch-3 { background: color-mix(in oklab, var(--cell) 76%, var(--sunken)); }
+.amap-swatch-4 { background: var(--cell); }
